@@ -4,13 +4,15 @@ pipeline {
     environment {
         TOMCAT_IP = "172.31.28.95"
         KEY = "jenkinkey.pem"
+        PATH = "/usr/bin:/usr/local/bin:/bin:/usr/sbin:/sbin"
     }
 
     stages {
 
         stage('Check Tools') {
             steps {
-                sh 'java -version'
+                sh 'echo $PATH'
+                sh 'which mvn'
                 sh 'mvn -version'
             }
         }
