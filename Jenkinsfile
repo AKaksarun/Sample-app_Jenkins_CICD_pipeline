@@ -1,14 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'
-        jdk 'JDK17'
-    }
-
     environment {
         TOMCAT_IP = "172.31.28.95"
         KEY = "jenkinkey.pem"
+        PATH = "/usr/bin:/usr/local/bin:/bin:/usr/sbin:/sbin"
     }
 
     stages {
@@ -16,6 +12,13 @@ pipeline {
         stage('Clone Code') {
             steps {
                 git 'https://github.com/AKaksarun/sample-app.git'
+            }
+        }
+
+        stage('Check Tools') {
+            steps {
+                sh 'java -version'
+                sh 'mvn -version'
             }
         }
 
