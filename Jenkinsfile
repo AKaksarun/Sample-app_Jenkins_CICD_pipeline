@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         TOMCAT_IP = "172.31.28.95"
-        KEY = "jenkinkey.pem"
+        KEY = "/var/lib/jenkins/.ssh/jenkinkey.pem"
         PATH = "/usr/bin:/usr/local/bin:/bin:/usr/sbin:/sbin"
     }
 
@@ -27,7 +27,8 @@ pipeline {
             steps {
                 sh '''
                 chmod 400 $KEY
-                scp -o StrictHostKeyChecking=no -i $KEY target/sample-app.war ec2-user@$TOMCAT_IP:/opt/tomcat/webapps/
+                scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+                -i $KEY target/sample-app.war ec2-user@$TOMCAT_IP:/opt/tomcat/webapps/
                 '''
             }
         }
