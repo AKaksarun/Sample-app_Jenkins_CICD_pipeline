@@ -4,16 +4,9 @@ pipeline {
     environment {
         TOMCAT_IP = "172.31.28.95"
         KEY = "jenkinkey.pem"
-        PATH = "/usr/bin:/usr/local/bin:/bin:/usr/sbin:/sbin"
     }
 
     stages {
-
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/AKaksarun/sample-app.git'
-            }
-        }
 
         stage('Check Tools') {
             steps {
